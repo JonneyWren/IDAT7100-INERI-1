@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conversational Quantitative Strategy Generation</title>
+<style>
+:root{--navy:#14243b;--blue:#315f96;--ink:#263447;--muted:#65748a;--line:#dce3ec;--pale:#f1f5fa;--paper:#fff}
+*{box-sizing:border-box}
+body{margin:0;background:#f2f5f9;color:var(--ink);font:15px/1.55 Inter,Arial,sans-serif}
+header{background:var(--navy);color:#fff;padding:36px max(24px,calc((100% - 1080px)/2))}
+.kicker{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#b9cce4;font-weight:700}
+h1{font-size:clamp(28px,4vw,42px);line-height:1.12;margin:10px 0}
+header p{color:#d5e0ee;margin:0;max-width:760px;font-size:16px}
+main{max-width:1120px;margin:24px auto;padding:0 22px 42px}
+.tabs{display:flex;gap:8px;padding:7px;background:#e5ebf3;border:1px solid #d5deea;border-radius:10px;margin-bottom:14px}
+.tab{flex:1;border:1px solid transparent;background:transparent;color:#53647a;padding:11px 14px;border-radius:7px;font-size:14px;font-weight:700;cursor:pointer}
+.tab.active{background:#fff;color:var(--navy);border-color:#d7e0eb;box-shadow:0 2px 7px #14243b12}
+.panel,.section{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:21px 23px;margin-bottom:13px;box-shadow:0 3px 12px #14243b08}
+.panel[hidden]{display:none}
+.panel-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;padding-bottom:13px;margin-bottom:14px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-weight:800}
+h2{font-size:20px;line-height:1.25;color:var(--navy);margin:3px 0 5px}
+h3{font-size:13px;color:var(--navy);margin:0 0 5px}
+.intro{color:var(--muted);margin:0;max-width:790px;font-size:14px}
+.tag{white-space:nowrap;color:var(--blue);background:var(--pale);border:1px solid var(--line);border-radius:20px;padding:6px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.item{background:#f8fafd;border:1px solid var(--line);border-radius:8px;padding:12px 13px;min-width:0}
+.item p,.item li{font-size:12.5px;margin:0;color:#4e5d71}
+.item ul{margin:0;padding-left:17px}
+.item li+li{margin-top:3px}
+.flow{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.flow span{background:#edf3fa;border:1px solid #dce6f1;border-radius:5px;padding:6px 7px;font-size:11px;font-weight:650;color:#263d5a}
+.flow b{font-size:12px;color:#8493a7}
+.note{margin-top:11px;padding:10px 13px;background:#f1f5fa;border-left:3px solid var(--blue);border-radius:0 6px 6px 0;font-size:12.5px}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.num{display:inline-grid;place-items:center;flex:0 0 26px;height:26px;border-radius:6px;background:var(--pale);color:var(--blue);font-size:12px;font-weight:800}
+.section .intro{margin-bottom:12px}
+.section .item{min-height:76px}
+.section .item p{font-size:12.5px}
+a{color:var(--blue);font-size:12px;text-decoration:none;font-weight:700}
+a:hover{text-decoration:underline}
+.footer{text-align:center;color:var(--muted);font-size:11px;padding:10px}
+@media(max-width:720px){main{padding:0 13px 30px}.grid{grid-template-columns:1fr}.panel-head{display:block}.tag{display:inline-block;margin-top:9px}.tabs{gap:4px}.tab{padding:10px 5px;font-size:12px}.panel,.section{padding:17px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">Research presentation · Platform comparison & system design</div>
+  <h1>Conversational Quantitative Strategy Generation</h1>
+  <p>WANG Jiani - 3036722874</p>
+  <p>From natural-language investment ideas to structured, testable and cost-aware quantitative strategies.</p>
+</header>
+<main>
+<nav class="tabs" aria-label="Platform showcase" role="tablist">
+  <button class="tab active" type="button" role="tab" aria-selected="true" data-tab="composer" onclick="showPlatform('composer')">Composer</button>
+  <button class="tab" type="button" role="tab" aria-selected="false" data-tab="quantconnect" onclick="showPlatform('quantconnect')">QuantConnect</button>
+  <button class="tab" type="button" role="tab" aria-selected="false" data-tab="capitalise" onclick="showPlatform('capitalise')">Capitalise.ai</button>
+</nav>
+
+<section class="panel" id="panel-composer">
+  <div class="panel-head"><div><div class="eyebrow">Platform showcase · Portfolio strategy builder</div><h2>Composer</h2><p class="intro">Transforms investment ideas into rule-based portfolio structures, allocations and rebalancing logic.</p></div><span class="tag">Portfolio structure</span></div>
+  <div class="grid">
+    <div class="item"><h3>Workflow</h3><div class="flow"><span>Investment idea</span><b>→</b><span>Portfolio rules</span><b>→</b><span>Backtest</span><b>→</b><span>Deploy</span></div></div>
+    <div class="item"><h3>User inputs</h3><ul><li>Asset universe</li><li>Selection conditions</li><li>Weights and rebalance rules</li></ul></div>
+    <div class="item"><h3>Output & relevance</h3><p>Structured portfolio logic. A useful model for converting user intent into an inspectable strategy schema.</p></div>
+  </div>
+  <div class="note"><strong>Focus:</strong> Portfolio construction and strategy formalization, rather than unrestricted custom algorithm engineering.</div>
+  <p><a href="https://www.composer.trade/" target="_blank" rel="noopener">Official website ↗</a></p>
+</section>
+
+<section class="panel" id="panel-quantconnect" hidden>
+  <div class="panel-head"><div><div class="eyebrow">Platform showcase · Quant research & algorithm engineering</div><h2>QuantConnect</h2><p class="intro">Provides infrastructure to develop, backtest and deploy quantitative algorithms using Python or C#.</p></div><span class="tag">Executable algorithm</span></div>
+  <div class="grid">
+    <div class="item"><h3>Workflow</h3><div class="flow"><span>Hypothesis</span><b>→</b><span>Code</span><b>→</b><span>Backtest</span><b>→</b><span>Refine</span></div></div>
+    <div class="item"><h3>User inputs</h3><ul><li>Data and asset universe</li><li>Signals and portfolio logic</li><li>Orders and risk controls</li></ul></div>
+    <div class="item"><h3>Output & relevance</h3><p>Runnable algorithms and backtest results. A reference for code validation, reproducible testing and iterative debugging.</p></div>
+  </div>
+  <div class="note"><strong>Focus:</strong> Algorithm research and execution lifecycle; generated code still requires inspection and validation.</div>
+  <p><a href="https://www.quantconnect.com/" target="_blank" rel="noopener">Official website ↗</a></p>
+</section>
+
+<section class="panel" id="panel-capitalise" hidden>
+  <div class="panel-head"><div><div class="eyebrow">Platform showcase · Natural-language trading automation</div><h2>Capitalise.ai</h2><p class="intro">Converts plain-language trading instructions into explicit conditions and actions for testing or automation.</p></div><span class="tag">Trading rules</span></div>
+  <div class="grid">
+    <div class="item"><h3>Workflow</h3><div class="flow"><span>Instruction</span><b>→</b><span>IF–THEN rules</span><b>→</b><span>Test</span><b>→</b><span>Automate</span></div></div>
+    <div class="item"><h3>User inputs</h3><ul><li>Trigger conditions</li><li>Entry and exit actions</li><li>Price and time rules</li></ul></div>
+    <div class="item"><h3>Output & relevance</h3><p>Explicit conditional rules. A reference for intent parsing and ambiguity control in natural-language interfaces.</p></div>
+  </div>
+  <div class="note"><strong>Focus:</strong> Rule interpretation and automation, rather than open-ended quantitative algorithm development.</div>
+  <p><a href="https://capitalise.ai/" target="_blank" rel="noopener">Official website ↗</a></p>
+</section>
+
+<section class="section">
+  <div class="section-head"><span class="num">01</span><h2>Concept & Scope</h2></div>
+  <p class="intro">Conversational quant generation converts investment ideas into formal strategies that can be validated, backtested and potentially deployed.</p>
+  <div class="grid">
+    <div class="item"><h3>Input</h3><p>Natural-language investment objectives, preferences and constraints.</p></div>
+    <div class="item"><h3>Core process</h3><p>Translate intent into explicit, machine-readable strategy logic.</p></div>
+    <div class="item"><h3>Principle</h3><p>Language is the interface—not the strategy. Validation and controlled execution remain essential.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><span class="num">02</span><h2>Competitive Landscape</h2></div>
+  <p class="intro">The platforms address different stages of the quantitative investment workflow.</p>
+  <div class="grid">
+    <div class="item"><h3>Capitalise.ai · Rule generation</h3><p>Natural language to explicit trading conditions.</p></div>
+    <div class="item"><h3>Composer · Portfolio strategy</h3><p>Investment objectives to portfolio structure and allocation rules.</p></div>
+    <div class="item"><h3>QuantConnect · Quant development</h3><p>Algorithm coding, backtesting and deployment.</p></div>
+    <div class="item"><h3>TrendSpider · Technical analysis</h3><p>Chart analysis, signal research and strategy testing.</p></div>
+    <div class="item"><h3>Bloomberg BQuant · Research</h3><p>Python-oriented institutional data and analytics environment.</p></div>
+    <div class="item"><h3>Comparison</h3><p>They are complementary categories, not direct substitutes.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><span class="num">03</span><h2>Three Generation Patterns</h2></div>
+  <p class="intro">The main difference is the form of strategy representation produced by the system.</p>
+  <div class="grid">
+    <div class="item"><h3>Natural Language → Rules</h3><p>Conditions and actions. Best for explicit, relatively simple trading instructions.</p></div>
+    <div class="item"><h3>Natural Language → Strategy</h3><p>Assets, weights and portfolio logic. Best for allocation-level investment ideas.</p></div>
+    <div class="item"><h3>Natural Language → Code</h3><p>Executable Python/C#. Best for flexible research, algorithm development and iteration.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><span class="num">04</span><h2>Comparative Logic</h2></div>
+  <p class="intro">Compare platforms by what they formalize and what their workflows are designed to support.</p>
+  <div class="grid">
+    <div class="item"><h3>Trading rules</h3><p>Capitalise.ai · Natural-language rule parsing and automation.</p></div>
+    <div class="item"><h3>Portfolio structure</h3><p>Composer · Asset selection, allocation and rebalancing.</p></div>
+    <div class="item"><h3>Executable algorithm</h3><p>QuantConnect · Code lifecycle, backtesting and deployment.</p></div>
+  </div>
+  <div class="note">TrendSpider emphasizes technical strategy research; Bloomberg BQuant emphasizes institutional data and quantitative research infrastructure.</div>
+</section>
+
+<section class="section">
+  <div class="section-head"><span class="num">05</span><h2>Proposed System Architecture</h2></div>
+  <p class="intro">A modular pipeline separates language understanding from execution and independent validation.</p>
+  <div class="grid">
+    <div class="item"><h3>1 · Understand</h3><p>Extract objectives, assets, horizon and constraints.</p></div>
+    <div class="item"><h3>2 · Formalize</h3><p>Create a structured strategy schema.</p></div>
+    <div class="item"><h3>3 · Generate</h3><p>Produce strategy logic and executable code.</p></div>
+    <div class="item"><h3>4 · Validate</h3><p>Check schema, code, security and risk limits.</p></div>
+    <div class="item"><h3>5 · Backtest</h3><p>Run sandbox tests with fees and slippage.</p></div>
+    <div class="item"><h3>6 · Monitor</h3><p>Track performance, risk, token cost and latency.</p></div>
+  </div>
+  <div class="note"><strong>Design choice:</strong> Use a structured strategy schema as the interface between the LLM, validators and backtesting engine.</div>
+</section>
+
+<section class="section">
+  <div class="section-head"><span class="num">06</span><h2>Strategy Schema</h2></div>
+  <p class="intro">A machine-readable specification makes strategy logic inspectable, testable and reusable.</p>
+  <div class="grid">
+    <div class="item"><h3>Universe & signals</h3><p>Assets, indicators, entry and exit conditions.</p></div>
+    <div class="item"><h3>Parameters & constraints</h3><p>Lookback, rebalance frequency, position limits and drawdown limits.</p></div>
+    <div class="item"><h3>Cost budget</h3><p>Trading-cost assumptions and LLM token/inference budget.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><span class="num">07</span><h2>Dynamic Cost-Aware Optimization</h2></div>
+  <p class="intro">Each additional AI optimization cycle should justify its inference cost and risk implications.</p>
+  <div class="grid">
+    <div class="item"><h3>Objective</h3><p><strong>J = αP − βC<sub>trade</sub> − γC<sub>LLM</sub> − δR</strong></p></div>
+    <div class="item"><h3>Performance & costs</h3><p>P: strategy performance. C<sub>trade</sub>: fees, spread and slippage.</p></div>
+    <div class="item"><h3>AI cost & risk</h3><p>C<sub>LLM</sub>: inference cost. R: risk penalty.</p></div>
+  </div>
+  <div class="note">Illustrative objective: normalize terms before combining them and enforce critical risk limits as hard constraints.</div>
+</section>
+
+<section class="section">
+  <div class="section-head"><span class="num">08</span><h2>Validation & Research Priorities</h2></div>
+  <p class="intro">Evaluate both technical reliability and the quality of the resulting strategy.</p>
+  <div class="grid">
+    <div class="item"><h3>Validation</h3><p>Intent accuracy, schema correctness, code checks and reproducible backtests.</p></div>
+    <div class="item"><h3>Robustness</h3><p>Realistic trading costs, out-of-sample tests and risk-limit enforcement.</p></div>
+    <div class="item"><h3>Research questions</h3><p>Schema-first or direct code? Which parameters can self-optimize? When is another AI iteration worthwhile?</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head"><span class="num">09</span><h2>Takeaway</h2></div>
+  <p class="intro">A practical design combines strategy formalization, algorithm development and cost-aware feedback.</p>
+  <div class="grid">
+    <div class="item"><h3>Strategy layer</h3><p>Composer-style structured portfolio and strategy representation.</p></div>
+    <div class="item"><h3>Engineering layer</h3><p>QuantConnect-style development, validation and reproducible backtesting.</p></div>
+    <div class="item"><h3>Research contribution</h3><p>Dynamic AI iteration balancing performance, trading costs, risk and inference cost.</p></div>
+  </div>
+</section>
+<div class="footer">Conversational Quantitative Strategy Generation · Research Presentation</div>
+</main>
+<script>
+function showPlatform(name){
+  document.querySelectorAll('.tab').forEach(button=>{
+    const active=button.dataset.tab===name;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-selected',String(active));
+  });
+  document.querySelectorAll('.panel').forEach(panel=>{
+    panel.hidden=panel.id!=='panel-'+name;
+  });
+}
+</script>
+</body>
+</html>
